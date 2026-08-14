@@ -1,0 +1,57 @@
+class EventsController < ApplicationController
+  before_action :set_event, only: %i[show edit update destroy]
+  before_action :authorize_owner!, only: %i[edit update destroy]
+
+  def index
+    @events = Event.all
+  end
+
+  def show
+  end
+
+  def new
+    @event = Event.new
+  end
+
+  def create
+    @event = Current.user.events.build(event_params)
+
+    if @event.save
+      redirect_to @event, notice: "Event created successfully."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to events_path, notice: "Event deleted successfully."
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def authorize_owner!
+    return if @event.user == Current.user
+
+    redirect_to events_path, alert: "You are not authorized to modify this event."
+  end
+
+  def event_params
+    params.expect(event: [:title, :description, :date, :location, :capacity])
+  end
+end
