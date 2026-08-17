@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_14_115157) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_17_115641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer "capacity"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "date"
     t.text "description"
@@ -23,7 +30,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_115157) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "event_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["event_id"], name: "index_orders_on_event_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -35,6 +53,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_115157) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "order_id", null: false
+    t.string "status"
+    t.string "ticket_number"
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_tickets_on_order_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
@@ -43,6 +70,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_115157) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "events", "categories"
   add_foreign_key "events", "users"
+  add_foreign_key "orders", "events"
+  add_foreign_key "orders", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "tickets", "orders"
 end

@@ -3,8 +3,14 @@ class EventsController < ApplicationController
   before_action :authorize_owner!, only: %i[edit update destroy]
 
   def index
-    @events = Event.all
+  events = Event.all
+
+  if params[:query].present?
+    events = events.where("title ILIKE ?", "%#{params[:query]}%")
   end
+
+  @pagy, @events = pagy(:offset, events.order(:id), limit: 5)
+end
 
   def show
   end
