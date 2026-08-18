@@ -1,3 +1,8 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1><%= @event.title %></h1>
+
+<p><%= @event.description %></p>
+<p><strong>Date:</strong> <%= @event.date %></p>
+<p><strong>Location:</strong> <%= @event.location %></p>
+<p><strong>Capacity:</strong> <%= @event.capacity %></p>
+
 <%= button_to "Book Event", event_orders_path(@event), method: :post %>
