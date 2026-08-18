@@ -8,6 +8,11 @@ class OrdersController < ApplicationController
     )
 
     if order.save
+      order.create_ticket!(
+        ticket_number: "TICKET-#{order.id}",
+        status: "active"
+      )
+
       redirect_to event, notice: "Event booked successfully."
     else
       redirect_to event, alert: "Could not book this event."

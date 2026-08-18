@@ -1,13 +1,13 @@
 <h1>New Event</h1>
 
 <%= form_with model: @event do |form| %>
-    <% if @event.errors.any? %>
-  <ul>
-    <% @event.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @event.errors.any? %>
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <div>
     <%= form.label :title %>
@@ -32,6 +32,11 @@
   <div>
     <%= form.label :capacity %>
     <%= form.number_field :capacity %>
+  </div>
+
+  <div>
+    <%= form.label :category_id, "Category" %>
+    <%= form.collection_select :category_id, @categories, :id, :name, include_blank: "Select a category" %>
   </div>
 
   <%= form.submit "Create Event" %>
