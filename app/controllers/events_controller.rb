@@ -58,6 +58,6 @@ end
   end
 
   def event_params
-    params.expect(event: [:title, :description, :date, :location, :capacity])
+    params.expect(event: [ :title, :description, :date, :location, :capacity ])
   end
 end
