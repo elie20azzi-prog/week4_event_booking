@@ -1,0 +1,15 @@
+<h1>Events</h1>
+
+<%= form_with url: events_path, method: :get do |form| %>
+  <%= form.text_field :query, value: params[:query], placeholder: "Search events" %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<ul>
+  <% @events.each do |event| %>
+    <li>
+      <%= link_to event.title, event_path(event) %>
+    </li>
+  <% end %>
+</ul>
+<%== @pagy.series_nav %>

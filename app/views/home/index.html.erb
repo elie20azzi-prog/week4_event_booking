@@ -1,0 +1,13 @@
+<h1>Week 4 Event Booking</h1>
+
+<p>You are logged in.</p>
+
+<p>
+  <%= link_to "View Events", events_path %>
+</p>
+
+<p>
+  <%= link_to "Create New Event", new_event_path %>
+</p>
+
+<%= button_to "Log out", session_path, method: :delete %>
