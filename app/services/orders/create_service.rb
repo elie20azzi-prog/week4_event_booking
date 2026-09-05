@@ -18,6 +18,8 @@ module Orders
         status: "active"
       )
 
+      BookingNotificationJob.perform_later(order.id)
+
       order
     end
   end
