@@ -30,7 +30,7 @@ RSpec.describe BookingMailer, type: :mailer do
 
     mail = described_class.confirmation(order)
 
-    expect(mail.to).to eq(["attendee@example.com"])
+    expect(mail.to).to eq([ "attendee@example.com" ])
     expect(mail.subject).to eq("Booking confirmed for Rails Conference")
     expect(mail.body.encoded).to include("TICKET-#{order.id}")
   end
