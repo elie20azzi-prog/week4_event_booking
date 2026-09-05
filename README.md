@@ -148,3 +148,33 @@ The application validates important data such as:
 * Category name must be present.
 * Ticket number must be present and unique.
 * A user cannot book the same event more than once.
+
+
+
+
+
+
+
+## Week 5 Advanced Rails Enhancements
+
+Week 5 extends the Week 4 event-booking app with:
+
+- Sidekiq background jobs
+- Service objects
+- Concerns
+- Active Storage image uploads
+- Booking confirmation mailer
+- REST API endpoints
+- JSON serialization
+- RSpec tests
+
+API endpoints:
+
+GET /api/v1/events
+GET /api/v1/events/:id
+
+Tests:
+6 examples, 0 failures
+
+RuboCop:
+79 files inspected, no offenses detected
