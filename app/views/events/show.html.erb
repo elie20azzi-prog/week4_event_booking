@@ -1,5 +1,11 @@
 <h1><%= @event.title %></h1>
 
+<% if @event.image.attached? %>
+  <p>
+    <%= image_tag @event.image, alt: @event.title, style: "max-width: 500px; height: auto;" %>
+  </p>
+<% end %>
+
 <p><%= @event.description %></p>
 <p><strong>Date:</strong> <%= @event.date %></p>
 <p><strong>Location:</strong> <%= @event.location %></p>
