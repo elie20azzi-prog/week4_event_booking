@@ -70,3 +70,5 @@ end
 gem "pagy"
 
 gem "sidekiq"
+
+gem "devise"
