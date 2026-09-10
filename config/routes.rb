@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   get "home/index"
 
-  resource :session
-
-  resources :passwords, param: :token
-
-  resource :registration, only: %i[new create]
+devise_for :users
 
   resources :events do
     resources :orders, only: %i[create]

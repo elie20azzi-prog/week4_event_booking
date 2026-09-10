@@ -3,13 +3,13 @@ require "rails_helper"
 RSpec.describe "Event booking", type: :feature do
   scenario "authenticated user books an event" do
     owner = User.create!(
-      email_address: "owner@example.com",
+      email: "owner@example.com",
       password: "password123",
       password_confirmation: "password123"
     )
 
     attendee = User.create!(
-      email_address: "attendee@example.com",
+      email: "attendee@example.com",
       password: "password123",
       password_confirmation: "password123"
     )
@@ -23,11 +23,11 @@ RSpec.describe "Event booking", type: :feature do
       user: owner
     )
 
-    visit new_session_path
+    visit new_user_session_path
 
-    fill_in "Enter your email address", with: attendee.email_address
-    fill_in "Enter your password", with: "password123"
-    click_button "Sign in"
+    fill_in "Email", with: attendee.email
+    fill_in "Password", with: "password123"
+    click_button "Log in"
 
     visit event_path(event)
 

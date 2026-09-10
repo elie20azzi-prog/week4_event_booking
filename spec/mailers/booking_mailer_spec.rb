@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe BookingMailer, type: :mailer do
   it "builds a booking confirmation email" do
     user = User.create!(
-      email_address: "attendee@example.com",
+      email: "attendee@example.com",
       password: "password123",
       password_confirmation: "password123"
     )

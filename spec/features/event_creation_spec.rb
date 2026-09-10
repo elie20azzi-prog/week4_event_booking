@@ -3,17 +3,16 @@ require "rails_helper"
 RSpec.describe "Event creation", type: :feature do
   scenario "authenticated user creates an event" do
     user = User.create!(
-      email_address: "creator@example.com",
+      email: "creator@example.com",
       password: "password123",
       password_confirmation: "password123"
     )
 
-    visit new_session_path
+    visit new_user_session_path
 
-    fill_in "Enter your email address", with: user.email_address
-    fill_in "Enter your password", with: "password123"
-
-    click_button "Sign in"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: "password123"
+    click_button "Log in"
 
     visit new_event_path
 

@@ -15,7 +15,7 @@
   <p><strong>Category:</strong> <%= @event.category.name %></p>
 <% end %>
 
-<% if @event.user == Current.user %>
+<% if @event.user == current_user %>
   <%= link_to "Edit Event", edit_event_path(@event) %>
   <%= button_to "Delete Event", @event, method: :delete %>
 <% else %>

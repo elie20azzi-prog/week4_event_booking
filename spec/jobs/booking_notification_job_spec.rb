@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe BookingNotificationJob, type: :job do
   it "calls the booking confirmation mailer for the order" do
     user = User.create!(
-      email_address: "attendee@example.com",
+      email: "attendee@example.com",
       password: "password123",
       password_confirmation: "password123"
     )

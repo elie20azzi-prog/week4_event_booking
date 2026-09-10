@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     event = Event.find(params[:event_id])
 
     order = Orders::CreateService.new(
-      user: Current.user,
+      user: current_user,
       event: event
     ).call
 

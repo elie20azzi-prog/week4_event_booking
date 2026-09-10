@@ -5,7 +5,7 @@ class BookingMailer < ApplicationMailer
     @event = order.event
 
     mail(
-      to: @user.email_address,
+      to: @user.email,
       subject: "Booking confirmed for #{@event.title}"
     )
   end

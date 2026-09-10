@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Current.user.events.build(event_params)
+    @event = current_user.events.build(event_params)
     @categories = Category.all
 
     if @event.save
