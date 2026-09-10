@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include OwnerAuthorizable
+
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_owner!, only: %i[edit update destroy]
 
@@ -21,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Current.user.events.build(event_params)
+    @event = current_user.events.build(event_params)
     @categories = Category.all
 
     if @event.save
@@ -56,15 +58,18 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  def authorize_owner!
-    return if @event.user == Current.user
-
-    redirect_to events_path, alert: "You are not authorized to modify this event."
-  end
 
   def event_params
-    params.expect(
-      event: [ :title, :description, :date, :location, :capacity, :category_id ]
-    )
-  end
+  params.expect(
+    event: [
+      :title,
+      :description,
+      :date,
+      :location,
+      :capacity,
+      :category_id,
+      :image
+    ]
+  )
+end
 end

@@ -39,5 +39,10 @@
     <%= form.collection_select :category_id, @categories, :id, :name, include_blank: "Select a category" %>
   </div>
 
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
   <%= form.submit "Update Event" %>
 <% end %>

@@ -1,5 +1,11 @@
 <h1><%= @event.title %></h1>
 
+<% if @event.image.attached? %>
+  <p>
+    <%= image_tag @event.image, alt: @event.title, style: "max-width: 500px; height: auto;" %>
+  </p>
+<% end %>
+
 <p><%= @event.description %></p>
 <p><strong>Date:</strong> <%= @event.date %></p>
 <p><strong>Location:</strong> <%= @event.location %></p>
@@ -9,7 +15,7 @@
   <p><strong>Category:</strong> <%= @event.category.name %></p>
 <% end %>
 
-<% if @event.user == Current.user %>
+<% if @event.user == current_user %>
   <%= link_to "Edit Event", edit_event_path(@event) %>
   <%= button_to "Delete Event", @event, method: :delete %>
 <% else %>

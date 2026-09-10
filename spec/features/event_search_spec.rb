@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Event search", type: :feature do
   scenario "user searches for an event" do
     user = User.create!(
-      email_address: "search@example.com",
+      email: "search@example.com",
       password: "password123",
       password_confirmation: "password123"
     )
@@ -17,11 +17,11 @@ RSpec.describe "Event search", type: :feature do
       user: user
     )
 
-    visit new_session_path
+    visit new_user_session_path
 
-    fill_in "Enter your email address", with: "search@example.com"
-    fill_in "Enter your password", with: "password123"
-    click_button "Sign in"
+    fill_in "Email", with: "search@example.com"
+    fill_in "Password", with: "password123"
+    click_button "Log in"
 
     visit events_path
 

@@ -2,17 +2,12 @@ class OrdersController < ApplicationController
   def create
     event = Event.find(params[:event_id])
 
-    order = Current.user.orders.build(
-      event: event,
-      status: "confirmed"
-    )
+    order = Orders::CreateService.new(
+      user: current_user,
+      event: event
+    ).call
 
-    if order.save
-      order.create_ticket!(
-        ticket_number: "TICKET-#{order.id}",
-        status: "active"
-      )
-
+    if order.persisted?
       redirect_to event, notice: "Event booked successfully."
     else
       redirect_to event, alert: "Could not book this event."
